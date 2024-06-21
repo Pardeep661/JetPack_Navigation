@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">JetPack_Navigation</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_your_email_to_get_otp">Enter your email to get OTP</string>
+    <string name="tv">Enter your email to get OTP</string>
+    <string name="google_gmail_com">google@gmail.com</string>
+    <string name="confirm">Confirm</string>
+    <string name="check">Check</string>
+    <string name="please_enter_the_otp_recieved_at">Please enter the OTP recieved at</string>
+</resources>
