@@ -1,5 +1,7 @@
 package com.pardeep.jetpack_navigation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -28,10 +30,12 @@ class FirstFragment : Fragment() {
     private var param2: String? = null
     var binding : FragmentFirstBinding? = null
     private  val TAG = "FirstFragment"
+    var rad_data =""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+            // data passing between fragment
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -58,7 +62,20 @@ class FirstFragment : Fragment() {
                 checkValidation()
                 if (checkValidation()) {
                     randomCode()
-                    findNavController().navigate(R.id.secondFragment)
+
+                    var implicit_intent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:")
+                        putExtra(Intent.EXTRA_EMAIL, arrayOf(binding?.etEmail?.text?.trim().toString()))
+                        putExtra(Intent.EXTRA_TEXT,"Your OTP is ${rad_data}")
+                        putExtra(Intent.EXTRA_SUBJECT,"OTP")
+                    }
+
+                    startActivity(implicit_intent)
+
+                    var bundle = Bundle()
+                    bundle.putString("email",binding?.etEmail?.text?.trim().toString())
+                    bundle.putString("OTP",rad_data)
+                    findNavController().navigate(R.id.action_firstFragment_to_secondFragment2 , bundle)
                 }
             }
         }
@@ -70,7 +87,8 @@ class FirstFragment : Fragment() {
         for(i in 1..LENGTH){
             rad_val += Random.nextInt(0,9)
         }
-        Log.d(TAG, rad_val)
+        rad_data = rad_val
+        Log.d(TAG, rad_data)
     }
 
     private fun checkValidation(): Boolean {
